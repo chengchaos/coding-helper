@@ -1,0 +1,33 @@
+A set of configuration properties of a Channel.
+Channel 的一组配置属性
+
+Please down-cast to more specific configuration type such as SocketChannelConfig or use setOptions(Map) to set the transport-specific properties:
+
+请向下转型到更具体的配置类型，如 SocketChannelConfig 或使用setOptions(Map)设置特定于传输的属性:
+
+```java
+   Channel ch = ...;
+   SocketChannelConfig cfg = (SocketChannelConfig) ch.getConfig();
+   cfg.setTcpNoDelay(false);
+```
+
+An option map property is a dynamic write-only property which allows the configuration of a Channel without down-casting its associated ChannelConfig. To update an option map, please call setOptions(Map).
+选项映射
+
+一个选项映射属性是一个动态的只写属性，它允许配置通道而不下拉其关联的通道配置。若要更新选项映射，请调用setOptions(map)。
+
+
+所有ChannelConfig都有以下选项:
+
+| Name | Associated setter method |
+| ---- | ---- |
+| ChannelOption.CONNECT_TIMEOUT_MILLIS | setConnectTimeoutMillis(int) |
+| ChannelOption.WRITE_SPIN_COUNT | setWriteSpinCount(int) |
+| ChannelOption.WRITE_BUFFER_WATER_MARK | setWriteBufferWaterMark(WriteBufferWaterMark) |
+| ChannelOption.ALLOCATOR | setAllocator(ByteBufAllocator) |
+| ChannelOption.AUTO_READ | setAutoRead(boolean) |
+
+More options are available in the sub-types of ChannelConfig. For example, you can configure the parameters which are specific to a TCP/IP socket as explained in SocketChannelConfig.
+
+ChannelConfig 的子类型中提供了更多的选项。
+例如，您可以配置特定于TCP/IP套接字的参数，如 SocketChannelConfig 中所述。
