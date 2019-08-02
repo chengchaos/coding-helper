@@ -4,9 +4,6 @@ import java.text.DecimalFormat
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 import java.util.Objects
-
-import org.apache.commons.lang3.StringUtils
-
 import scala.annotation.tailrec
 import scala.collection.mutable.ArrayBuffer
 
@@ -248,7 +245,7 @@ object ByteHelper {
       }
     }
 
-    if (StringUtils.isBlank(src)) ByteHelper.EMPTY_ARRAY
+    if (src == null || src.trim().isEmpty) ByteHelper.EMPTY_ARRAY
     else loop(src, 0, ArrayBuffer[Byte]())
 
   }
