@@ -31,14 +31,17 @@ object CodingHelper {
   /**
     * Non Null Or Else
     *
-    * @param whatever 一个对象
-    * @param other    如果为空则返回另外的
-    * @tparam A 类型
+    * @param whatever  any object instance .
+    * @param other     if null then return .
+    * @tparam A ...
     * @return
     */
   def nneo[A](whatever: A)(other: => A): A = {
-    if (Objects nonNull whatever) whatever
-    else other
+    if (Objects nonNull whatever) {
+      whatever
+    } else {
+      other
+    }
   }
 
   /**
@@ -52,12 +55,23 @@ object CodingHelper {
     * @return
     */
   def withClose[A <: {def close() : Unit}, B](closeable: A)(callback: A => B): B = {
+
     try {
       callback(closeable)
-    }
-    finally {
+    } finally {
       closeable.close()
     }
+
+  }
+
+  def withAutoCloseable[A <: AutoCloseable, B](closeable: AutoCloseable)(callback: A => B): B = {
+
+    try {
+      callback(closeable)
+    } finally {
+      closeable.close()
+    }
+
   }
 
 }
